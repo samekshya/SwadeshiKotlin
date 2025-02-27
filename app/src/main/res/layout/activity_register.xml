@@ -1,63 +1,104 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.activity.RegisterActivity">
+    android:background="@drawable/signup_background"
+    android:padding="16dp">
 
-    <EditText
-        android:id="@+id/registerFname"
-        android:layout_width="match_parent"
+    <LinearLayout
+        android:id="@+id/formContainer"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="text"
-        android:hint="Enter first name" />
+        android:background="@drawable/rounded_background"
+        android:padding="24dp"
+        android:orientation="vertical"
+        android:elevation="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-    <EditText
-        android:id="@+id/registerLName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="text"
-        android:hint="Enter last name" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sign Up"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:fontFamily="sans-serif-medium"
+            android:textColor="@color/velvetred"
+            android:layout_gravity="center_horizontal" />
 
-    <EditText
-        android:id="@+id/registerAddress"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="text"
-        android:hint="Enter address" />
+        <EditText
+            android:id="@+id/registerFname"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter first name"
+            android:background="@drawable/input_field"
+            android:padding="12dp"
+            android:textSize="16sp"
+            android:inputType="text" />
 
-    <EditText
-        android:id="@+id/registerContact"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="phone"
-        android:hint="Enter phone number" />
+        <EditText
+            android:id="@+id/registerLName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter last name"
+            android:background="@drawable/input_field"
+            android:padding="12dp"
+            android:textSize="16sp"
+            android:inputType="text" />
 
-    <EditText
-        android:id="@+id/registerEmail"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textEmailAddress"
-        android:hint="Enter email" />
-    <EditText
-        android:id="@+id/registerPassword"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPassword"
-        android:hint="Enter password" />
+        <EditText
+            android:id="@+id/registerAddress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter address"
+            android:background="@drawable/input_field"
+            android:padding="12dp"
+            android:textSize="16sp"
+            android:inputType="text" />
 
-    <Button
-        android:id="@+id/signUp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Sign up" />
-</LinearLayout>
+        <EditText
+            android:id="@+id/registerContact"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter phone number"
+            android:background="@drawable/input_field"
+            android:padding="12dp"
+            android:textSize="16sp"
+            android:inputType="phone" />
+
+        <EditText
+            android:id="@+id/registerEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter email"
+            android:background="@drawable/input_field"
+            android:padding="12dp"
+            android:textSize="16sp"
+            android:inputType="textEmailAddress" />
+
+        <EditText
+            android:id="@+id/registerPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter password"
+            android:background="@drawable/input_field"
+            android:padding="12dp"
+            android:textSize="16sp"
+            android:inputType="textPassword" />
+
+        <Button
+            android:id="@+id/signUp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/sign_up"
+            android:textSize="16sp"
+            android:background="@drawable/button_rounded"
+            android:textColor="@color/white"
+<!--            android:padding="12dp"-->
+            android:layout_marginTop="16dp" />
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

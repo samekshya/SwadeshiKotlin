@@ -2,4 +2,15 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="velvetred">#9B1B30</color>
+    <color name="deepblue">#003F87</color>
+    <color name="goldenyellow">#FFD700</color>
+    <color name="warmbeige">#EFE8E3</color>
+    <color name="classiccream">#FAE7C9</color>
+    <color name="slategray">#708090</color>
+    <color name="everestwhite">#F8F9FA</color>
+    <color name="himalayangray">#A9A9A9</color>
+    <color name="sandalwoodbrown">#8B5A2B</color>
+    <color name="lushgreen">#3B7A57</color>
+    <color name="twilightpurple">#6A3EA1</color>
 </resources>
