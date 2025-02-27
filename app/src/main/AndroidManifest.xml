@@ -18,6 +18,9 @@
         tools:replace="android:fullBackupContent"
         tools:targetApi="31">
         <activity
+            android:name=".ui.activity.OrderConfirmationActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.activity.CheckoutActivity"
             android:exported="false" />
         <activity
