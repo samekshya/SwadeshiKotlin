@@ -13,37 +13,47 @@ import com.example.a35b_crud.utils.LoadingUtils
 import com.example.a35b_crud.viewmodel.UserViewModel
 
 class ForgetPasswordActivity : AppCompatActivity() {
-    lateinit var forgetPasswordBinding: ActivityForgetPasswordBinding
-    lateinit var userViewModel: UserViewModel
-    lateinit var loadingUtils: LoadingUtils
+    private lateinit var forgetPasswordBinding: ActivityForgetPasswordBinding
+    private lateinit var userViewModel: UserViewModel
+    private lateinit var loadingUtils: LoadingUtils
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         forgetPasswordBinding = ActivityForgetPasswordBinding.inflate(layoutInflater)
         setContentView(forgetPasswordBinding.root)
 
-        //initializing auth viewmodel
-        var repo = UserRepositoryImpl()
+        // Initialize ViewModel & Repository
+        val repo = UserRepositoryImpl()
         userViewModel = UserViewModel(repo)
 
-        //initializing loading
+        // Initialize Loading Utils
         loadingUtils = LoadingUtils(this)
+
+        // Handle Reset Password Button Click
         forgetPasswordBinding.btnForget.setOnClickListener {
+            val email = forgetPasswordBinding.editEmailForget.text.toString().trim()
+
+            // Validate email input
+            if (email.isEmpty()) {
+                Toast.makeText(this, "Please enter your email", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            // Show loading
             loadingUtils.show()
-            var email: String = forgetPasswordBinding.editEmailForget.text.toString()
 
+            // Call ViewModel function
             userViewModel.forgetPassword(email) { success, message ->
+                loadingUtils.dismiss()
+                Toast.makeText(this, message, Toast.LENGTH_LONG).show()
                 if (success) {
-                    loadingUtils.dismiss()
-                    Toast.makeText(this@ForgetPasswordActivity, message, Toast.LENGTH_LONG).show()
-                    finish()
-                } else {
-                    loadingUtils.dismiss()
-                    Toast.makeText(this@ForgetPasswordActivity, message, Toast.LENGTH_LONG).show()
-
+                    finish() // Close the activity if reset email was sent successfully
                 }
             }
         }
+
+        // Handle Window Insets for Edge-to-Edge UI
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
