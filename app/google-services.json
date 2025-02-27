@@ -1,0 +1,49 @@
+{
+  "project_info": {
+    "project_number": "578328209518",
+    "firebase_url": "https://samb-addbf-default-rtdb.firebaseio.com",
+    "project_id": "samb-addbf",
+    "storage_bucket": "samb-addbf.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:578328209518:android:9e81e639df984574d35e7f",
+        "android_client_info": {
+          "package_name": "com.example.a35b_crud"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC56O0ixedy5wYjMF3wUcoQfOMPs4VIpbA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:578328209518:android:921c7f45b0a4d438d35e7f",
+        "android_client_info": {
+          "package_name": "com.example.samb_crud"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC56O0ixedy5wYjMF3wUcoQfOMPs4VIpbA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
