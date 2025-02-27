@@ -10,10 +10,13 @@
 
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/buttomNavigation"
+        android:id="@+id/bottomNavigation"
         android:layout_width="match_parent"
         app:menu="@menu/nav_bar"
         app:labelVisibilityMode="labeled"
+        android:background="@color/deepblue"
+        app:itemIconTint="@color/goldenyellow"
+        app:itemTextColor="@color/white"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -22,8 +25,9 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_weight="1"
         android:id="@+id/frameLayout"
-        app:layout_constraintBottom_toTopOf="@+id/buttomNavigation"
+        app:layout_constraintBottom_toTopOf="@+id/bottomNavigation"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
