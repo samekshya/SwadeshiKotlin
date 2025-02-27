@@ -1,37 +1,56 @@
 package com.example.a35b_crud.ui.activity
 
+import android.content.Intent
 import android.os.Bundle
-import android.widget.TextView
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.a35b_crud.R
-import com.example.a35b_crud.adapter.CartAdapter
-import com.example.a35b_crud.model.CartItem
 
 class CheckoutActivity : AppCompatActivity() {
 
-    private lateinit var recyclerView: RecyclerView
-    private lateinit var cartAdapter: CartAdapter
-    private var cartList: ArrayList<CartItem> = arrayListOf()
+    private lateinit var editAddress: EditText
+    private lateinit var radioPaymentMethod: RadioGroup
+    private lateinit var btnPlaceOrder: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_checkout)
 
-        // Receive Cart Items from Intent
-        cartList = intent.getParcelableArrayListExtra("cartItems") ?: arrayListOf()
+        // Initialize UI Elements
+        editAddress = findViewById(R.id.editAddress)
+        radioPaymentMethod = findViewById(R.id.radioPaymentMethod)
+        btnPlaceOrder = findViewById(R.id.btnPlaceOrder)
 
-        // Initialize RecyclerView
-        recyclerView = findViewById(R.id.recyclerCheckout)
-        recyclerView.layoutManager = LinearLayoutManager(this)
-        cartAdapter = CartAdapter(cartList) { _, _ -> }
-        recyclerView.adapter = cartAdapter
+        btnPlaceOrder.setOnClickListener {
+            placeOrder()
+        }
+    }
 
-        // Calculate Total Price
-        val totalPrice = cartList.sumOf { it.price * it.quantity }
-        findViewById<TextView>(R.id.txtTotalPrice).text = "Total: Rs. $totalPrice"
+    private fun placeOrder() {
+        val address = editAddress.text.toString().trim()
+        val selectedPaymentId = radioPaymentMethod.checkedRadioButtonId
+        val selectedPaymentMethod = if (selectedPaymentId == R.id.radioCashOnDelivery) {
+            "Cash on Delivery"
+        } else {
+            "Online Payment"
+        }
 
-        // TODO: Add logic to proceed with payment or place order
+        // Validate Address
+        if (address.isEmpty()) {
+            Toast.makeText(this, "Please enter a delivery address", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        // Proceed with order placement (For now, we just show a success message)
+        Toast.makeText(this, "Order placed successfully!", Toast.LENGTH_LONG).show()
+
+        // TODO: Save order details to database (Firebase or local DB)
+
+        // Navigate to Order Confirmation
+        val intent = Intent(this, OrderConfirmationActivity::class.java)
+        intent.putExtra("address", address)
+        intent.putExtra("paymentMethod", selectedPaymentMethod)
+        startActivity(intent)
+        finish()
     }
 }
