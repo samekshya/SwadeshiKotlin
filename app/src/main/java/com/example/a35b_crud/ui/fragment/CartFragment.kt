@@ -1,5 +1,6 @@
 package com.example.a35b_crud.ui.fragment
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.a35b_crud.R
 import com.example.a35b_crud.adapter.CartAdapter
 import com.example.a35b_crud.model.CartItem
+import com.example.a35b_crud.ui.activity.CheckoutActivity
 
 class CartFragment : Fragment() {
 
@@ -42,8 +44,13 @@ class CartFragment : Fragment() {
         // Checkout Button Click Listener
         val btnCheckout = view.findViewById<Button>(R.id.btnCheckout)
         btnCheckout.setOnClickListener {
-            Toast.makeText(requireContext(), "Proceeding to checkout...", Toast.LENGTH_SHORT).show()
-            // TODO: Navigate to CheckoutActivity
+            if (cartList.isNotEmpty()) {
+                val intent = Intent(requireContext(), CheckoutActivity::class.java)
+                intent.putParcelableArrayListExtra("cartItems", cartList)
+                startActivity(intent)
+            } else {
+                Toast.makeText(requireContext(), "Your cart is empty!", Toast.LENGTH_SHORT).show()
+            }
         }
 
         return view
