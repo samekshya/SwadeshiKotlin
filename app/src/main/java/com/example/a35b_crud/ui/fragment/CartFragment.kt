@@ -31,9 +31,9 @@ class CartFragment : Fragment() {
         recyclerView = view.findViewById(R.id.recyclerCart)
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
-        // Sample Cart Data for Testing (Replace this with real data later)
-        cartList.add(CartItem("Handmade Bag", 1500.0, R.drawable.handmade_bag, 1))
-        cartList.add(CartItem("Pashmina Scarf", 2500.0, R.drawable.pashmina_poncho, 2))
+        // Sample Cart Data for Testing (Replace with real data from database or ViewModel)
+        cartList.add(CartItem("Handmade Bag", 1500.0, "https://example.com/image1.jpg", 1))
+        cartList.add(CartItem("Pashmina Scarf", 2500.0, "https://example.com/image2.jpg", 2))
 
         // Initialize Adapter
         cartAdapter = CartAdapter(cartList) { item, position ->
@@ -44,12 +44,13 @@ class CartFragment : Fragment() {
         // Checkout Button Click Listener
         val btnCheckout = view.findViewById<Button>(R.id.btnCheckout)
         btnCheckout.setOnClickListener {
-            if (cartList.isNotEmpty()) {
+            if (cartList.isEmpty()) {
+                Toast.makeText(requireContext(), "Cart is empty!", Toast.LENGTH_SHORT).show()
+            } else {
+                // Open CheckoutActivity and Pass Cart Items
                 val intent = Intent(requireContext(), CheckoutActivity::class.java)
                 intent.putParcelableArrayListExtra("cartItems", cartList)
                 startActivity(intent)
-            } else {
-                Toast.makeText(requireContext(), "Your cart is empty!", Toast.LENGTH_SHORT).show()
             }
         }
 

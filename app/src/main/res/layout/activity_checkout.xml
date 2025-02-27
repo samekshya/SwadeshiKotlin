@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp"
@@ -10,40 +12,68 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <!-- Order Summary -->
-        <TextView
-            android:id="@+id/txtOrderSummary"
+        <!-- Order Summary Card -->
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Order Summary"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:paddingBottom="8dp" />
+            app:cardCornerRadius="12dp"
+            app:cardElevation="4dp"
+            android:padding="12dp"
+            android:layout_marginBottom="16dp"
+            android:background="#FFFFFF">
 
-        <TextView
-            android:id="@+id/txtOrderDetails"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Handmade Bag - Rs. 1500\nPashmina Scarf - Rs. 2500"
-            android:textSize="16sp"
-            android:paddingBottom="16dp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="12dp">
 
-        <!-- Total Price -->
+                <TextView
+                    android:id="@+id/txtOrderSummary"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Order Summary"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textColor="#000000"
+                    android:paddingBottom="8dp" />
+
+                <TextView
+                    android:id="@+id/txtOrderDetails"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Handmade Bag - Rs. 1500\nPashmina Scarf - Rs. 2500"
+                    android:textSize="16sp"
+                    android:textColor="#555555"
+                    android:paddingBottom="8dp" />
+
+                <TextView
+                    android:id="@+id/txtTotalPrice"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Total: Rs. 4000"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textColor="#D32F2F"
+                    android:paddingBottom="8dp" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- Delivery Address -->
         <TextView
-            android:id="@+id/txtTotalPrice"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Total: Rs. 4000"
+            android:text="Delivery Address"
             android:textSize="18sp"
             android:textStyle="bold"
-            android:paddingBottom="16dp" />
+            android:textColor="#000000"
+            android:paddingBottom="8dp" />
 
-        <!-- Address Input -->
         <EditText
             android:id="@+id/editAddress"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Enter delivery address"
+            android:hint="Enter your delivery address"
             android:background="@drawable/edit_text_background"
             android:padding="12dp"
             android:textSize="16sp"
@@ -56,6 +86,7 @@
             android:text="Payment Method"
             android:textSize="18sp"
             android:textStyle="bold"
+            android:textColor="#000000"
             android:paddingBottom="8dp" />
 
         <RadioGroup
@@ -68,13 +99,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Cash on Delivery"
+                android:textSize="16sp"
+                android:textColor="#333333"
                 android:checked="true" />
 
             <RadioButton
                 android:id="@+id/radioOnlinePayment"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Online Payment" />
+                android:text="Online Payment"
+                android:textSize="16sp"
+                android:textColor="#333333" />
         </RadioGroup>
 
         <!-- Place Order Button -->
@@ -86,6 +121,7 @@
             android:textSize="18sp"
             android:backgroundTint="#673AB7"
             android:textColor="#FFFFFF"
-            android:layout_marginTop="16dp" />
+            android:layout_marginTop="16dp"
+            android:padding="12dp" />
     </LinearLayout>
 </ScrollView>
