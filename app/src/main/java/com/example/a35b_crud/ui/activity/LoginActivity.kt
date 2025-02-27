@@ -66,7 +66,7 @@ class LoginActivity : AppCompatActivity() {
             startActivity(Intent(this, ForgetPasswordActivity::class.java))
         }
 
-        // ✅ Fix: Prevent Crash on `findViewById(R.id.main)`
+
         val mainView = findViewById<View?>(R.id.main)
         mainView?.let {
             ViewCompat.setOnApplyWindowInsetsListener(it) { v, insets ->
