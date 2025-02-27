@@ -9,13 +9,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.a35b_crud.R
 import com.example.a35b_crud.adapter.ProductAdapter
-import com.example.a35b_crud.model.Product
+import com.example.a35b_crud.model.ProductModel
 
 class HomeFragment : Fragment() {
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var productAdapter: ProductAdapter
-    private var productList: ArrayList<Product> = arrayListOf()
+    private var productList: ArrayList<ProductModel> = arrayListOf()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -23,17 +23,15 @@ class HomeFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_home, container, false)
 
-        // Initialize RecyclerView
         recyclerView = view.findViewById(R.id.recyclerProducts)
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
-        // Sample Data for Testing
-        productList.add(Product("Handmade Bag", 1500.0, R.drawable.handmade_bag))
-        productList.add(Product("Pashmina Scarf", 2500.0, R.drawable.pashmina_scarf))
-        productList.add(Product("Wooden Carving", 5000.0, R.drawable.wooden_carving))
+        // Sample Data (Corrected)
+        productList.add(ProductModel("", "Handmade Bag", "Beautiful handmade bag", 1500, ""))
+        productList.add(ProductModel("", "Pashmina Scarf", "Luxurious scarf from Nepal", 2500, ""))
+        productList.add(ProductModel("", "Wooden Carving", "Handcrafted wooden art", 5000, ""))
 
-        // Initialize Adapter
-        productAdapter = ProductAdapter(productList)
+        productAdapter = ProductAdapter(requireContext(), productList)
         recyclerView.adapter = productAdapter
 
         return view

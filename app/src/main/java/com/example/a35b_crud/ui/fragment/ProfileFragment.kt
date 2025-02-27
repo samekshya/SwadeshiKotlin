@@ -10,6 +10,7 @@ import android.widget.Toast
 import com.example.a35b_crud.R
 import com.example.a35b_crud.databinding.FragmentProfileBinding
 import com.example.a35b_crud.repository.UserRepositoryImpl
+import com.example.a35b_crud.ui.activity.EditProfileActivity
 import com.example.a35b_crud.ui.activity.LoginActivity
 import com.example.a35b_crud.viewmodel.UserViewModel
 
@@ -48,6 +49,12 @@ class ProfileFragment : Fragment() {
             }
         }
 
+        // Handle Edit Profile Click
+        binding.editProfile.setOnClickListener {
+            val intent = Intent(requireContext(), EditProfileActivity::class.java)
+            startActivity(intent)
+        }
+
         // Handle Logout Click
         binding.logout.setOnClickListener {
             userViewModel.logout { success, message ->
@@ -61,6 +68,5 @@ class ProfileFragment : Fragment() {
                 }
             }
         }
-
     }
 }

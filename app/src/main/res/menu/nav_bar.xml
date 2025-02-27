@@ -8,7 +8,7 @@
         android:title="Home"
         app:showAsAction="ifRoom"
         app:iconTint="@color/white"
-        app:titlrTextColor="@color/goldenyellow"/>
+        app:titleTextColor="@color/goldenyellow"/>
 
     <item
         android:id="@+id/menuCart"

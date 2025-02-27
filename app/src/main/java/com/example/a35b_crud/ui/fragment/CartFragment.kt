@@ -31,7 +31,7 @@ class CartFragment : Fragment() {
 
         // Sample Cart Data for Testing (Replace this with real data later)
         cartList.add(CartItem("Handmade Bag", 1500.0, R.drawable.handmade_bag, 1))
-        cartList.add(CartItem("Pashmina Scarf", 2500.0, R.drawable.pashmina_scarf, 2))
+        cartList.add(CartItem("Pashmina Scarf", 2500.0, R.drawable.pashmina_poncho, 2))
 
         // Initialize Adapter
         cartAdapter = CartAdapter(cartList) { item, position ->
