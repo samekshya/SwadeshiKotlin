@@ -12,7 +12,7 @@ data class UserModel(
     var phoneNumber : String = "",
     var imageName : String = "",
     var imageUrl : String = "",
-) : Parcelable{
+) : Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readString() ?: "",
         parcel.readString() ?: "",
@@ -45,3 +45,4 @@ data class UserModel(
             return arrayOfNulls(size)
         }
     }
+}
