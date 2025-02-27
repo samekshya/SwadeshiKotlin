@@ -17,24 +17,23 @@ import com.squareup.picasso.Picasso
 import java.lang.Exception
 import java.util.ArrayList
 
-class ProductAdapter(val context: Context,
-                     var data : ArrayList<ProductModel>) : RecyclerView.Adapter<ProductAdapter.ProductViewHolder>(){
+class ProductAdapter(
+    val context: Context,
+    private var data: ArrayList<ProductModel>
+) : RecyclerView.Adapter<ProductAdapter.ProductViewHolder>() {
 
-    class ProductViewHolder(itemView: View)
-        : RecyclerView.ViewHolder(itemView){
-
-        val imageView : ImageView = itemView.findViewById(R.id.getImage)
-        val loading : ProgressBar = itemView.findViewById(R.id.progressBar2)
-        val editButton : TextView = itemView.findViewById(R.id.lblEdit)
-        val pName : TextView = itemView.findViewById(R.id.displayName)
-        val pPrice : TextView = itemView.findViewById(R.id.displayPrice)
-        val pDesc : TextView = itemView.findViewById(R.id.displayDesc)
+    class ProductViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val imageView: ImageView = itemView.findViewById(R.id.getImage)
+        val loading: ProgressBar = itemView.findViewById(R.id.progressBar2)
+        val editButton: TextView = itemView.findViewById(R.id.lblEdit)
+        val pName: TextView = itemView.findViewById(R.id.displayName)
+        val pPrice: TextView = itemView.findViewById(R.id.displayPrice)
+        val pDesc: TextView = itemView.findViewById(R.id.displayDesc)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder {
-        val itemView : View = LayoutInflater.from(context).
-        inflate(R.layout.sample_products,parent,false)
-
+        val itemView: View = LayoutInflater.from(context)
+            .inflate(R.layout.sample_products, parent, false)
         return ProductViewHolder(itemView)
     }
 
@@ -43,42 +42,49 @@ class ProductAdapter(val context: Context,
     }
 
     override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {
-        holder.pName.text = data[position].productName
-        holder.pPrice.text = data[position].price.toString()
-        holder.pDesc.text = data[position].productDesc
+        val product = data[position]
 
-        Picasso.get().load(data[position].imageUrl).into(holder.imageView,object:Callback{
-            override fun onSuccess() {
-                holder.loading.visibility = View.GONE
-            }
+        holder.pName.text = product.productName
+        holder.pPrice.text = product.price.toString()
+        holder.pDesc.text = product.productDesc
 
-            override fun onError(e: Exception?) {
+        // Check if image URL is valid
+        val imageUrl = product.imageUrl
+        if (!imageUrl.isNullOrEmpty()) {
+            // Load image with Picasso
+            Picasso.get()
+                .load(imageUrl)
+                .placeholder(R.drawable.default_image) // Placeholder while loading
+                .error(R.drawable.default_image) // Fallback image on error
+                .into(holder.imageView, object : Callback {
+                    override fun onSuccess() {
+                        holder.loading.visibility = View.GONE
+                    }
 
-            }
-
-        })
-
+                    override fun onError(e: Exception?) {
+                        holder.loading.visibility = View.GONE
+                    }
+                })
+        } else {
+            // If image URL is empty, load default image
+            Picasso.get().load(R.drawable.default_image).into(holder.imageView)
+            holder.loading.visibility = View.GONE
+        }
 
         holder.editButton.setOnClickListener {
-            val intent = Intent(context,UpdateProductActivity::class.java)
-//            if model pass garnu paryo bhane
-//            first make model parcelable
-//            intent.putExtra("products",data[position])
-
-            intent.putExtra("productId",data[position].productId)
-
+            val intent = Intent(context, UpdateProductActivity::class.java)
+            intent.putExtra("productId", product.productId)
             context.startActivity(intent)
         }
     }
 
-    fun updateData(products: List<ProductModel>){
+    fun updateData(products: List<ProductModel>) {
         data.clear()
         data.addAll(products)
         notifyDataSetChanged()
     }
 
-    fun getProductId(position: Int) : String{
+    fun getProductId(position: Int): String {
         return data[position].productId
     }
-
 }
