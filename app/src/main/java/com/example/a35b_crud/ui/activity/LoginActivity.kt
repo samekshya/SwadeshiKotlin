@@ -44,14 +44,18 @@ class LoginActivity : AppCompatActivity() {
             }
 
             loadingUtils.show()
+
+            // Ensure login process does not hang indefinitely
             userViewModel.login(email, password) { success, message ->
-                loadingUtils.dismiss()
-                if (success) {
-                    Toast.makeText(this@LoginActivity, message, Toast.LENGTH_LONG).show()
-                    startActivity(Intent(this@LoginActivity, NavigationActivity::class.java))
-                    finish()
-                } else {
-                    Toast.makeText(this, message, Toast.LENGTH_LONG).show()
+                runOnUiThread {
+                    loadingUtils.dismiss()
+                    if (success) {
+                        Toast.makeText(this@LoginActivity, "Login successful!", Toast.LENGTH_LONG).show()
+                        startActivity(Intent(this@LoginActivity, NavigationActivity::class.java))
+                        finish()
+                    } else {
+                        Toast.makeText(this@LoginActivity, "Login failed: $message", Toast.LENGTH_LONG).show()
+                    }
                 }
             }
         }
@@ -66,7 +70,7 @@ class LoginActivity : AppCompatActivity() {
             startActivity(Intent(this, ForgetPasswordActivity::class.java))
         }
 
-
+        // Handle System Insets for UI Adjustment
         val mainView = findViewById<View?>(R.id.main)
         mainView?.let {
             ViewCompat.setOnApplyWindowInsetsListener(it) { v, insets ->
