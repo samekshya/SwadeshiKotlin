@@ -26,10 +26,10 @@ class HomeFragment : Fragment() {
         recyclerView = view.findViewById(R.id.recyclerProducts)
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
-        // Sample Data (Corrected)
-        productList.add(ProductModel("", "Handmade Bag", "Beautiful handmade bag", 1500, ""))
-        productList.add(ProductModel("", "Pashmina Scarf", "Luxurious scarf from Nepal", 2500, ""))
-        productList.add(ProductModel("", "Wooden Carving", "Handcrafted wooden art", 5000, ""))
+        // ✅ FIX: Convert Int values to Double (1500 → 1500.0)
+        productList.add(ProductModel("", "Handmade Bag", "Beautiful handmade bag", 1500.0, ""))
+        productList.add(ProductModel("", "Pashmina Scarf", "Luxurious scarf from Nepal", 2500.0, ""))
+        productList.add(ProductModel("", "Wooden Carving", "Handcrafted wooden art", 5000.0, ""))
 
         productAdapter = ProductAdapter(requireContext(), productList)
         recyclerView.adapter = productAdapter

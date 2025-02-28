@@ -2,29 +2,31 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
-    tools:context=".ui.fragment.CartFragment">
+    android:padding="16dp">
 
+    <TextView
+        android:id="@+id/txtTotalPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Total: Rs. 0"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:paddingBottom="10dp" />
 
-    <!-- RecyclerView for Cart Items -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerCart"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        android:padding="8dp" />
+        android:layout_weight="1" />
 
-    <!-- Checkout Button -->
     <Button
         android:id="@+id/btnCheckout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Proceed to Checkout"
         android:textSize="16sp"
-        android:background="@color/velvetred"
-        android:textColor="@android:color/white"
-        android:padding="12dp"
-        android:layout_margin="10dp" />
-
+        android:backgroundTint="#673AB7"
+        android:textColor="#FFFFFF"
+        android:layout_marginTop="10dp" />
 </LinearLayout>

@@ -4,28 +4,26 @@ import android.os.Parcel
 import android.os.Parcelable
 
 data class CartItem(
-    val productName: String,
+    val name: String,
     val price: Double,
-    val imageUrl: String,  // Change this if you're using local images
+    val imageUrl: String?, // Made nullable in case it's missing
     val quantity: Int
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readString() ?: "",
         parcel.readDouble(),
-        parcel.readString() ?: "",
+        parcel.readString(), // Read nullable string
         parcel.readInt()
     )
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
-        parcel.writeString(productName)
+        parcel.writeString(name)
         parcel.writeDouble(price)
-        parcel.writeString(imageUrl)
+        parcel.writeString(imageUrl) // Write nullable string
         parcel.writeInt(quantity)
     }
 
-    override fun describeContents(): Int {
-        return 0
-    }
+    override fun describeContents(): Int = 0
 
     companion object CREATOR : Parcelable.Creator<CartItem> {
         override fun createFromParcel(parcel: Parcel): CartItem {

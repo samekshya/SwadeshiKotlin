@@ -29,6 +29,13 @@ class CheckoutActivity : AppCompatActivity() {
     private fun placeOrder() {
         val address = editAddress.text.toString().trim()
         val selectedPaymentId = radioPaymentMethod.checkedRadioButtonId
+
+        // Check if a payment method is selected
+        if (selectedPaymentId == -1) {
+            Toast.makeText(this, "Please select a payment method", Toast.LENGTH_SHORT).show()
+            return
+        }
+
         val selectedPaymentMethod = if (selectedPaymentId == R.id.radioCashOnDelivery) {
             "Cash on Delivery"
         } else {
@@ -46,11 +53,11 @@ class CheckoutActivity : AppCompatActivity() {
 
         // TODO: Save order details to database (Firebase or local DB)
 
-        // Navigate to Order Confirmation
+        // Navigate to Order Confirmation Page
         val intent = Intent(this, OrderConfirmationActivity::class.java)
         intent.putExtra("address", address)
         intent.putExtra("paymentMethod", selectedPaymentMethod)
         startActivity(intent)
-        finish()
+        finish() // Close CheckoutActivity
     }
 }

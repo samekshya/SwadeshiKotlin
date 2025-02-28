@@ -12,39 +12,51 @@ import com.example.a35b_crud.model.CartItem
 import com.squareup.picasso.Picasso
 
 class CartAdapter(
-    private val cartList: ArrayList<CartItem>,
+    private var cartItems: MutableList<CartItem>,
     private val onRemoveClick: (CartItem, Int) -> Unit
 ) : RecyclerView.Adapter<CartAdapter.CartViewHolder>() {
 
     class CartViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val productImage: ImageView = itemView.findViewById(R.id.cartItemImage)
-        val productName: TextView = itemView.findViewById(R.id.cartItemName)
-        val productPrice: TextView = itemView.findViewById(R.id.cartItemPrice)
-        val productQuantity: TextView = itemView.findViewById(R.id.cartItemQuantity)
-        val removeButton: Button = itemView.findViewById(R.id.btnRemoveItem)
+        val imageView: ImageView = itemView.findViewById(R.id.cartImage)
+        val name: TextView = itemView.findViewById(R.id.cartName)
+        val price: TextView = itemView.findViewById(R.id.cartPrice)
+        val quantity: TextView = itemView.findViewById(R.id.cartQuantity)
+        val btnRemove: Button = itemView.findViewById(R.id.btnRemove)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CartViewHolder {
-        val itemView = LayoutInflater.from(parent.context)
-            .inflate(R.layout.cart_item_layout, parent, false)
-        return CartViewHolder(itemView)
+        val view = LayoutInflater.from(parent.context)
+            .inflate(R.layout.item_cart, parent, false)
+        return CartViewHolder(view)
     }
 
-    override fun getItemCount(): Int = cartList.size
-
     override fun onBindViewHolder(holder: CartViewHolder, position: Int) {
-        val item = cartList[position]
+        val item = cartItems[position]
 
-        holder.productName.text = item.productName
-        holder.productPrice.text = "Rs. ${item.price}"
-        holder.productQuantity.text = "Qty: ${item.quantity}"
+        holder.name.text = item.name
+        holder.price.text = "Rs. ${item.price}"
+        holder.quantity.text = "Qty: ${item.quantity}"
 
-        // Load product image
-        Picasso.get().load(item.imageUrl).into(holder.productImage)
+        // Check if imageUrl is empty or null before loading
+        if (!item.imageUrl.isNullOrEmpty()) {
+            Picasso.get().load(item.imageUrl).into(holder.imageView)
+        } else {
+            // Load a default image if imageUrl is empty
+            holder.imageView.setImageResource(R.drawable.default_image)
+        }
 
-        // Handle remove button click
-        holder.removeButton.setOnClickListener {
+        // Remove button
+        holder.btnRemove.setOnClickListener {
             onRemoveClick(item, position)
         }
+    }
+
+    override fun getItemCount(): Int {
+        return cartItems.size
+    }
+
+    fun updateList(newList: MutableList<CartItem>) {
+        cartItems = newList
+        notifyDataSetChanged()
     }
 }

@@ -10,69 +10,105 @@
         app:cardCornerRadius="12dp"
         android:layout_margin="12dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        app:cardElevation="6dp">
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:padding="10dp"
-            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
+            <!-- Product Image -->
             <ImageView
                 android:id="@+id/getImage"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:layout_marginStart="4dp"
                 android:src="@drawable/placeholder"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
 
+            <!-- Product Name -->
             <TextView
                 android:id="@+id/displayName"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="24dp"
+                android:layout_height="wrap_content"
                 android:text="Product name"
-                app:layout_constraintStart_toEndOf="@+id/getImage"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@id/getImage"
+                app:layout_constraintTop_toTopOf="@id/getImage"
+                android:layout_marginStart="12dp"/>
 
-            <TextView
-                android:id="@+id/displayPrice"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="8dp"
-                android:text="Product price"
-                app:layout_constraintStart_toEndOf="@+id/getImage"
-                app:layout_constraintTop_toBottomOf="@+id/displayDesc" />
-
+            <!-- Product Description -->
             <TextView
                 android:id="@+id/displayDesc"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginStart="18dp"
-                android:layout_marginTop="13dp"
-                android:text="Product desc"
-                app:layout_constraintStart_toEndOf="@+id/getImage"
-                app:layout_constraintTop_toBottomOf="@+id/displayName" />
+                android:layout_height="wrap_content"
+                android:text="Product description"
+                android:textSize="14sp"
+                app:layout_constraintStart_toEndOf="@id/getImage"
+                app:layout_constraintTop_toBottomOf="@id/displayName"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="4dp"/>
 
+            <!-- Product Price -->
             <TextView
-                android:id="@+id/lblEdit"
+                android:id="@+id/displayPrice"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="Edit"
-                android:textColor="@android:color/holo_blue_dark"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent" />
+                android:layout_height="wrap_content"
+                android:text="Rs. 1500"
+                android:textSize="14sp"
+                android:textColor="@android:color/holo_green_dark"
+                app:layout_constraintStart_toEndOf="@id/getImage"
+                app:layout_constraintTop_toBottomOf="@id/displayDesc"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="4dp"/>
 
+            <!-- Horizontal Layout for Edit & Add to Cart -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginEnd="12dp">
+
+                <!-- Edit Button -->
+                <TextView
+                    android:id="@+id/lblEdit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Edit"
+                    android:textSize="14sp"
+                    android:textColor="@android:color/holo_blue_dark"
+                    android:paddingEnd="10dp"
+                    android:clickable="true"
+                    android:focusable="true"/>
+
+                <!-- Add to Cart Button -->
+                <Button
+                    android:id="@+id/btnAddToCart"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Add to Cart"
+                    android:textSize="12sp"
+                    android:padding="6dp"
+                    android:backgroundTint="@color/velvetred"
+                    android:textColor="@color/white"/>
+            </LinearLayout>
+
+            <!-- Progress Bar (for image loading) -->
             <ProgressBar
                 android:id="@+id/progressBar2"
                 style="?android:attr/progressBarStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintEnd_toEndOf="@+id/getImage"
-                app:layout_constraintStart_toStartOf="@+id/getImage"
-                tools:layout_editor_absoluteY="37dp" />
+                app:layout_constraintStart_toStartOf="@id/getImage"
+                app:layout_constraintEnd_toEndOf="@id/getImage"
+                app:layout_constraintTop_toTopOf="@id/getImage"
+                android:visibility="gone"/>
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 
