@@ -2,7 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <!-- ✅ Internet Permissions (Required for Firebase) -->
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
 
@@ -17,63 +19,25 @@
         android:theme="@style/Theme._35BCRUD"
         tools:replace="android:fullBackupContent"
         tools:targetApi="31">
-        <activity
-            android:name=".ui.activity.OrderConfirmationActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.activity.CheckoutActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.activity.UpdateProductActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.activity.AddProductActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.activity.ProductDashboardActivity"
-            android:exported="true">
+
+        <!-- All activities (Login first) -->
+        <activity android:name=".ui.activity.OrderConfirmationActivity" android:exported="false" />
+        <activity android:name=".ui.activity.CheckoutActivity" android:exported="false" />
+        <activity android:name=".ui.activity.UpdateProductActivity" android:exported="false" />
+        <activity android:name=".ui.activity.AddProductActivity" android:exported="false" />
+        <activity android:name=".ui.activity.ProductDashboardActivity" android:exported="false" />
+        <activity android:name=".ui.activity.ForgetPasswordActivity" android:exported="false" />
+        <activity android:name=".ui.activity.NavigationActivity" android:exported="false" />
+        <activity android:name=".ui.activity.RegisterActivity" android:exported="false" />
+
+
+        <activity android:name=".ui.activity.LoginActivity" android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".ui.activity.ForgetPasswordActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.activity.NavigationActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity
-            android:name=".ui.activity.RegisterActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.activity.LoginActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity
-            android:name=".MainActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity
-            android:name=".ui.activity.EditProfileActivity"
-            android:exported="false" />
+        <activity android:name=".ui.activity.EditProfileActivity" android:exported="false" />
     </application>
-
 </manifest>
