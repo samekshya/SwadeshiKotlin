@@ -37,13 +37,8 @@ class CartAdapter(
         holder.price.text = "Rs. ${item.price}"
         holder.quantity.text = "Qty: ${item.quantity}"
 
-        // Check if imageUrl is empty or null before loading
-        if (!item.imageUrl.isNullOrEmpty()) {
-            Picasso.get().load(item.imageUrl).into(holder.imageView)
-        } else {
-            // Load a default image if imageUrl is empty
-            holder.imageView.setImageResource(R.drawable.default_image)
-        }
+        // ✅ Fix: Use imageUrl as a drawable resource ID
+        holder.imageView.setImageResource(item.imageUrl)
 
         // Remove button
         holder.btnRemove.setOnClickListener {

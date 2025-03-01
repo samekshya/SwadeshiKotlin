@@ -6,20 +6,21 @@ import android.os.Parcelable
 data class CartItem(
     val name: String,
     val price: Double,
-    val imageUrl: String?, // Made nullable in case it's missing
-    val quantity: Int
+    val imageUrl: Int, // ✅ Ensure imageUrl is an Int
+    val quantity: Int,
+    val totalPrice: Double = price * quantity
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readString() ?: "",
         parcel.readDouble(),
-        parcel.readString(), // Read nullable string
+        parcel.readInt(), // ✅ Read Int instead of String
         parcel.readInt()
     )
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeString(name)
         parcel.writeDouble(price)
-        parcel.writeString(imageUrl) // Write nullable string
+        parcel.writeInt(imageUrl) // ✅ Write Int instead of String
         parcel.writeInt(quantity)
     }
 

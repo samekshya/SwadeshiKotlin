@@ -97,7 +97,15 @@ class AddProductActivity : AppCompatActivity() {
             return
         }
 
-        val model = ProductModel("", productName, productDesc, productPrice, url)
+        // ✅ Fix: Convert URL string to Int (If needed)
+        val imageInt: Int? = url.toIntOrNull()
+
+        // ✅ Fix: Ensure the correct constructor is used
+        val model = if (imageInt != null) {
+            ProductModel("", productName, productDesc, productPrice, imageInt) // Use Int for drawable images
+        } else {
+            ProductModel("", productName, productDesc, productPrice, R.drawable.placeholder) // Use a default image
+        }
 
         productViewModel.addProduct(model) { success, message ->
             Toast.makeText(this, message, Toast.LENGTH_LONG).show()

@@ -26,10 +26,17 @@ class HomeFragment : Fragment() {
         recyclerView = view.findViewById(R.id.recyclerProducts)
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
-        // ✅ FIX: Convert Int values to Double (1500 → 1500.0)
-        productList.add(ProductModel("", "Handmade Bag", "Beautiful handmade bag", 1500.0, ""))
-        productList.add(ProductModel("", "Pashmina Scarf", "Luxurious scarf from Nepal", 2500.0, ""))
-        productList.add(ProductModel("", "Wooden Carving", "Handcrafted wooden art", 5000.0, ""))
+        // ✅ Adding images from drawable (Replace with actual images in your drawable folder)
+        productList.add(ProductModel("", "Handmade Bag", "Beautiful handmade bag", 1500.0, R.drawable.handmade_bag))
+        productList.add(ProductModel("", "Pashmina Poncho", "Luxurious scarf from Nepal", 2500.0, R.drawable.pashmina_poncho))
+        productList.add(ProductModel("", "Women's Pink Hoodie", "Luxurious Pashmina Pink hoodie", 1500.0, R.drawable.pink_hoodie))
+        productList.add(ProductModel("", "Women's Grey Highneck", "Luxurious Pashmina Grey hoodie", 1500.0, R.drawable.grey_highneck))
+        productList.add(ProductModel("", "Men's Brown Sweater", "Luxurious Pashmina Brown hoodie", 1500.0, R.drawable.brown_sweater))
+        productList.add(ProductModel("", "Pustakari", "Authentic Nepali Pustakari", 750.0, R.drawable.pustakari))
+        productList.add(ProductModel("", "Cookies", "Authentic Cookies made from Gundpak", 250.0, R.drawable.cookies))
+        productList.add(ProductModel("", "Coffee", "Medium Roasted Fine Grind Coffee", 1000.0, R.drawable.coffee))
+        productList.add(ProductModel("", "Tennis Bracelet", "Tennis Bracelet Made from Pure Silver And Zircon", 2000.0, R.drawable.tennis_bracelet))
+        productList.add(ProductModel("", "Spicy Titaura", "Spicy Lapsi Titaura", 300.0, R.drawable.spicy_titaura))
 
         productAdapter = ProductAdapter(requireContext(), productList)
         recyclerView.adapter = productAdapter

@@ -18,7 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <!-- Product Image -->
+
             <ImageView
                 android:id="@+id/getImage"
                 android:layout_width="100dp"
@@ -28,7 +28,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"/>
 
-            <!-- Product Name -->
+
             <TextView
                 android:id="@+id/displayName"
                 android:layout_width="wrap_content"
@@ -40,7 +40,7 @@
                 app:layout_constraintTop_toTopOf="@id/getImage"
                 android:layout_marginStart="12dp"/>
 
-            <!-- Product Description -->
+
             <TextView
                 android:id="@+id/displayDesc"
                 android:layout_width="wrap_content"
@@ -52,7 +52,7 @@
                 android:layout_marginStart="12dp"
                 android:layout_marginTop="4dp"/>
 
-            <!-- Product Price -->
+
             <TextView
                 android:id="@+id/displayPrice"
                 android:layout_width="wrap_content"
@@ -65,7 +65,7 @@
                 android:layout_marginStart="12dp"
                 android:layout_marginTop="4dp"/>
 
-            <!-- Horizontal Layout for Edit & Add to Cart -->
+
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -74,19 +74,19 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 android:layout_marginEnd="12dp">
 
-                <!-- Edit Button -->
+
                 <TextView
                     android:id="@+id/lblEdit"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Edit"
                     android:textSize="14sp"
-                    android:textColor="@android:color/holo_blue_dark"
+                    android:textColor="@android:color/white"
                     android:paddingEnd="10dp"
                     android:clickable="true"
                     android:focusable="true"/>
 
-                <!-- Add to Cart Button -->
+
                 <Button
                     android:id="@+id/btnAddToCart"
                     android:layout_width="wrap_content"
@@ -98,7 +98,7 @@
                     android:textColor="@color/white"/>
             </LinearLayout>
 
-            <!-- Progress Bar (for image loading) -->
+
             <ProgressBar
                 android:id="@+id/progressBar2"
                 style="?android:attr/progressBarStyle"

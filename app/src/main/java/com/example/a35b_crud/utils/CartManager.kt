@@ -6,14 +6,18 @@ object CartManager {
     private val cartItems = mutableListOf<CartItem>()
 
     fun addToCart(item: CartItem) {
-        val validImageUrl = item.imageUrl.takeIf { !it.isNullOrEmpty() } ?: "https://your-default-image-url.com/default.png"
-
         val existingItem = cartItems.find { it.name == item.name }
         if (existingItem != null) {
-            val updatedItem = existingItem.copy(quantity = existingItem.quantity + 1)
+            val updatedQuantity = existingItem.quantity + 1
+            val updatedItem = existingItem.copy(
+                quantity = updatedQuantity,
+                totalPrice = existingItem.price * updatedQuantity // ✅ Ensure totalPrice updates
+            )
             cartItems[cartItems.indexOf(existingItem)] = updatedItem
         } else {
-            cartItems.add(item.copy(imageUrl = validImageUrl))
+            cartItems.add(
+                item.copy(quantity = 1, totalPrice = item.price) // ✅ Set initial totalPrice correctly
+            )
         }
     }
 

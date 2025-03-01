@@ -45,10 +45,13 @@ class LoginActivity : AppCompatActivity() {
                     loadingUtils.dismiss()
 
                     if (task.isSuccessful) {
+
                         Toast.makeText(this, "Login successful!", Toast.LENGTH_LONG).show()
                         startActivity(Intent(this, NavigationActivity::class.java))
                         finish()
                     } else {
+                        binding.displayLoginResult.text = "login failed"
+                        binding.displayLoginResult.visibility = View.VISIBLE
                         val errorMessage = task.exception?.message ?: "Unknown error"
                         Toast.makeText(this, "Login failed: $errorMessage", Toast.LENGTH_LONG).show()
                         println("DEBUG: Firebase Login Error -> $errorMessage")
