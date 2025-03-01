@@ -2,6 +2,7 @@ package com.example.a35b_crud.ui.fragment
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -37,27 +38,20 @@ class CartFragment : Fragment() {
 
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
-        // Load cart items
-        cartList = ArrayList(CartManager.getCartItems())
-
-        if (cartList.isEmpty()) {
-            Toast.makeText(requireContext(), "Cart is empty!", Toast.LENGTH_SHORT).show()
-        }
-
-        // Initialize Adapter
-        cartAdapter = CartAdapter(cartList) { item, position ->
-            removeCartItem(position)
-        }
-        recyclerView.adapter = cartAdapter
-
-        updateTotalPrice() // Update total price initially
+        loadCartItems()
 
         btnCheckout.setOnClickListener {
             if (cartList.isEmpty()) {
                 Toast.makeText(requireContext(), "Cart is empty!", Toast.LENGTH_SHORT).show()
             } else {
-                // Navigate to CheckoutActivity
+                val totalAmount = cartList.sumOf { it.price * it.quantity }
+
+                // Debugging log
+                Log.d("CartFragment", "Total before checkout: Rs. $totalAmount")
+
+                // Pass total amount to CheckoutActivity
                 val intent = Intent(requireContext(), CheckoutActivity::class.java)
+                intent.putExtra("totalAmount", totalAmount)
                 startActivity(intent)
             }
         }
@@ -65,13 +59,28 @@ class CartFragment : Fragment() {
         return view
     }
 
+    private fun loadCartItems() {
+        cartList = ArrayList(CartManager.getCartItems())
+
+        if (cartList.isEmpty()) {
+            Toast.makeText(requireContext(), "Cart is empty!", Toast.LENGTH_SHORT).show()
+        }
+
+        cartAdapter = CartAdapter(cartList) { _, position ->
+            removeCartItem(position)
+        }
+        recyclerView.adapter = cartAdapter
+
+        updateTotalPrice()
+    }
+
     private fun removeCartItem(position: Int) {
         if (position >= 0 && position < cartList.size) {
             val item = cartList[position]
             CartManager.removeFromCart(item)
             cartList.removeAt(position)
-            cartAdapter.notifyDataSetChanged() // Update entire list to avoid index issues
-            updateTotalPrice() // Update total price after removal
+            cartAdapter.notifyItemRemoved(position) // Better than notifyDataSetChanged()
+            updateTotalPrice()
             Toast.makeText(requireContext(), "Item removed from cart", Toast.LENGTH_SHORT).show()
         }
     }
@@ -79,5 +88,8 @@ class CartFragment : Fragment() {
     private fun updateTotalPrice() {
         val total = cartList.sumOf { it.price * it.quantity }
         txtTotalPrice.text = "Total: Rs. $total"
+
+        // Debugging log
+        Log.d("CartFragment", "Updated Total: Rs. $total")
     }
 }

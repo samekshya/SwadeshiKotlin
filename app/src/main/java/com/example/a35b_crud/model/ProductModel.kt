@@ -8,22 +8,22 @@ data class ProductModel(
     var productName: String = "",
     var productDesc: String = "",
     var price: Double = 0.0,
-    var imageUrl: Int // ✅ Fix: Change from String to Int for drawable resource
+    var imageUrl: Int
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readString() ?: "",
         parcel.readString() ?: "",
         parcel.readString() ?: "",
-        parcel.readDouble(), // ✅ Fix: Correctly reading Double value
-        parcel.readInt() // ✅ Fix: Read Int instead of String for imageUrl
+        parcel.readDouble(),
+        parcel.readInt()
     )
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeString(productId)
         parcel.writeString(productName)
         parcel.writeString(productDesc)
-        parcel.writeDouble(price) // ✅ Fix: Correctly writing Double value
-        parcel.writeInt(imageUrl) // ✅ Fix: Write Int instead of String for imageUrl
+        parcel.writeDouble(price)
+        parcel.writeInt(imageUrl)
     }
 
     override fun describeContents(): Int = 0

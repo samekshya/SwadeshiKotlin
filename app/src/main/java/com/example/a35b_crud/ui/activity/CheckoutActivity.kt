@@ -2,6 +2,7 @@ package com.example.a35b_crud.ui.activity
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.example.a35b_crud.R
@@ -11,15 +12,24 @@ class CheckoutActivity : AppCompatActivity() {
     private lateinit var editAddress: EditText
     private lateinit var radioPaymentMethod: RadioGroup
     private lateinit var btnPlaceOrder: Button
+    private lateinit var txtTotalPrice: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_checkout)
 
-        // Initialize UI Elements
+
         editAddress = findViewById(R.id.editAddress)
         radioPaymentMethod = findViewById(R.id.radioPaymentMethod)
         btnPlaceOrder = findViewById(R.id.btnPlaceOrder)
+        txtTotalPrice = findViewById(R.id.txtTotalPrice)
+
+        // Get the total amount from intent
+        val totalAmount = intent.getDoubleExtra("totalAmount", 0.0)
+        txtTotalPrice.text = "Total: Rs. $totalAmount"
+
+        // Debugging log
+        Log.d("CheckoutActivity", "Received total: Rs. $totalAmount")
 
         btnPlaceOrder.setOnClickListener {
             placeOrder()

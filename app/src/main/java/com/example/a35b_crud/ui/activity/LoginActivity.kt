@@ -22,13 +22,13 @@ class LoginActivity : AppCompatActivity() {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Initialize Firebase Auth
+
         auth = FirebaseAuth.getInstance()
 
-        // Initialize Loading Utils
+
         loadingUtils = LoadingUtils(this)
 
-        // Handle Login Button Click
+
         binding.btnLogin.setOnClickListener {
             val email = binding.editEmail.text.toString().trim()
             val password = binding.editPassword.text.toString().trim()
