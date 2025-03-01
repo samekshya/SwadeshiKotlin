@@ -1,7 +1,7 @@
 package com.example.a35b_crud
 
 import com.example.a35b_crud.repository.AuthRepoImpl
-import com.example.democrud.repository.UserRepositoryImpl
+//import com.example.democrud.repository.UserRepositoryImpl
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.AuthResult
@@ -33,17 +33,17 @@ class AuthUniTest {
     @Before
     fun setup() {
         MockitoAnnotations.openMocks(this)
-        userRepository = AuthRepoImpl(mockAuth)
+        authRepo = AuthRepoImpl(mockAuth)
     }
     @Test
-    fun testRegister_Successful() {
+    fun testLogin_Successful() {
         val email = "test@example.com"
         val password = "testPassword"
         var expectedResult = "Initial Value" // Define the initial value
 
         // Mocking task to simulate successful registration
         `when`(mockTask.isSuccessful).thenReturn(true)
-        `when`(mockAuth.createUserWithEmailAndPassword(any(), any()))
+        `when`(mockAuth.signInWithEmailAndPassword(any(), any()))
             .thenReturn(mockTask)
 
         // Define a callback that updates the expectedResult
@@ -52,12 +52,12 @@ class AuthUniTest {
         }
 
         // Call the function under test
-        userRepository.login(email, password, callback)
+        authRepo.login(email, password, callback)
 
         verify(mockTask).addOnCompleteListener(captor.capture())
         captor.value.onComplete(mockTask)
 
         // Assert the result
-        assertEquals("Registration Successful", expectedResult)
+        assertEquals("Login Successful", expectedResult)
     }
 }
